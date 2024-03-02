@@ -1,0 +1,11 @@
+@import url('config.css');
+@import url('utilities.css');
+
+body {
+    font-family: var(--font) !important;
+}
+
+.option {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- Main Css -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Highlight JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <title>Custom world countries list generator</title>
+</head>
+<body>
+
+    <!-- Content -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 pb-5">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h2 class="fw-bold text-main">Customize your countries list</h2>
+                        </div>
+                        <div class="col-md-2 text-end my-auto">
+                            <i class="fab fa-github text-muted h3 pointer"></i>
+                        </div>
+                    </div>
+
+                    <!-- Alerts -->
+                    <div class="alert alert-secondary radius mt-3">
+                        1. Generate an array containing all the countries of the world with the data you selected <br />
+                        2. Create a .json file <br />
+                        3. Paste the generated data <br />
+                        4. If you're on VSCode, press (<i class="fab fa-apple"></i> OPTION + SHIFT + F) or (<i class="fab fa-windows"></i> CTRL + SHIFT + L) to format the code <br />
+                    </div>
+                    <div id="success-alert" class="alert bg-main text-white radius mt-3 d-none">List of countries was copied to your clipboard successfully.</div>
+                    <!-- / Alerts -->
+
+                    <!-- Demo -->
+                    <div id="demo" class="mt-4">
+                        <h5 class="text-main fw-bold">Example:</h5>
+                        <pre><code class="border language-json radius p-3">{"name":"Afghanistan","full_name":"Islamic Republic of Afghanistan","continent":"Asia","capital":"Kabul","currency":"Afghan Afghani","calling_code":"+93","flag":"https://www.worldometers.info/img/flags/af-flag.gif"}</code></pre>
+                    </div>
+                    <!-- / Demo -->
+
+                    <!-- Options -->
+                    <div class="options my-4">
+                        <h5 class="text-main fw-bold">Options:</h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="option">
+                                    <input type="checkbox" id="name" name="options[]" value="name" class="form-check-input" checked>
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="full_name" name="options[]" value="full_name" class="form-check-input" checked>
+                                    <label for="full_name">Full name</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="continent" name="options[]" value="continent" class="form-check-input" checked>
+                                    <label for="continent">Continent</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="code" name="options[]" value="code" class="form-check-input">
+                                    <label for="code">Code</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="capital" name="options[]" value="capital" class="form-check-input" checked>
+                                    <label for="capital">Capital city</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="option">
+                                    <input type="checkbox" id="citizenship" name="options[]" value="citizenship" class="form-check-input">
+                                    <label for="citizenship">Citizenship</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="domain_name" name="options[]" value="domain_name" class="form-check-input">
+                                    <label for="domain_name">Domain name</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="lat_long" name="options[]" value="lat_long" class="form-check-input">
+                                    <label for="lat_long">Latitude & Longitude</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="surface" name="options[]" value="surface" class="form-check-input">
+                                    <label for="surface">Surface</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="option">
+                                    <input type="checkbox" id="currency" name="options[]" value="currency" class="form-check-input" checked>
+                                    <label for="currency">Currency</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="currency_symbol" name="options[]" value="currency_symbol" class="form-check-input">
+                                    <label for="currency_symbol">Currency Symbol</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="currency_subsymbol" name="options[]" value="currency_subsymbol" class="form-check-input">
+                                    <label for="currency_subsymbol">Currency Sub-symbol</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="option">
+                                    <input type="checkbox" id="calling_code" name="options[]" value="calling_code" class="form-check-input" checked>
+                                    <label for="calling_code">Calling code</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="emoji" name="options[]" value="emoji" class="form-check-input">
+                                    <label for="emoji">Emoji</label>
+                                </div>
+                                <div class="option">
+                                    <input type="checkbox" id="flag" name="options[]" value="flag" class="form-check-input" checked>
+                                    <label for="flag">Flag</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Options -->
+
+                    <button onclick="generate()" class="btn btn-main"> 
+                        <i class="fa fa-copy"></i>
+                        Generate & Copy
+                    </button>
+
+                    <!-- Footer -->
+                    <div class="text-center text-muted mt-2 small">
+                        Created by 
+                        <a target="_blank" href="https://hbakouane.dev">Haytam Bakouane</a>
+                    </div>
+                    <!-- / Footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Content -->
+    
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        let generate = () => {
+            let countries = []
+            const options = getFields()
+            let successAlert = document.querySelector('#success-alert')
+
+            fetch('/assets/countries.json')
+                .then(data => {
+                    return data.json()
+                }).then(data => {
+                    data.forEach(country => {
+                        let output = []
+
+                        options.forEach(option => output[option] = option === 'flag' ? 'https://www.worldometers.info/img/flags/' + country.code.toLowerCase() + '-flag.gif' : country[option])
+
+                        countries.push({...output})
+                    })
+
+                    let countryIndex = Math.floor(Math.random() * 194)
+                    document.querySelector('#demo code').textContent = JSON.stringify(countries[countryIndex])
+
+                    navigator.clipboard.writeText(JSON.stringify(countries))
+
+                    successAlert.classList.remove('d-none')
+
+                    setTimeout(() => successAlert.classList.add('d-none'), 3500)
+                })
+                .catch(err => console.error('An issue occured while fetching countries (/assets/countries.json).'))
+        }
+
+        let getFields = () => {
+            let options = [] 
+
+            document.querySelectorAll('[name="options[]"]:checked').forEach(option => options.push(option.value))
+
+            return options
+        }
+    </script>
+
+</body>
+</html>
